@@ -12,12 +12,15 @@ Inspired by Dreamcast era of games, such as Jet Set Radio
 
 ## Controls
 WASD: Move
+
 Mouse: Move
+
 Right + Left Mouse Button: Take photo
+
 Left Mouse Button: Pick up/Drop
 
 
-##Gameplay Loop
+## Gameplay Loop
 
 1. Find something to take a photo of
 2. Drag the right objects or people into the scene
@@ -27,7 +30,10 @@ Left Mouse Button: Pick up/Drop
 ## Credits
 
 Wes Bondie
+
 Leo Herrera
+
 Zach Kolman
+
 Eddie Mustafaa
 
