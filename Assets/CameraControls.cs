@@ -87,7 +87,7 @@ public class CameraControls : MonoBehaviour
         yield return new WaitForEndOfFrame();
         foreach (headlineText obj in texts)
         {
-            Debug.Log(obj.headline);
+            Debug.Log("During a health inspection, a " + obj.headline + " was found!");
         }
     }
     
