@@ -38,6 +38,10 @@ public class CameraControls : MonoBehaviour
     private GameObject photoBoard;
 
     private FirstPersonController firstPersonController;
+
+    [SerializeField] 
+    public List<headlineText> texts;
+
     private void Awake()
     {
         starterAssetsInput = GetComponent<StarterAssetsInputs>();
@@ -66,6 +70,7 @@ public class CameraControls : MonoBehaviour
             {
                 print("yay");
                 StartCoroutine(TakePicture(cameraCam));
+                StartCoroutine(PrintHeadline());
                 starterAssetsInput.snap = false;
             }
         }
@@ -77,6 +82,15 @@ public class CameraControls : MonoBehaviour
         }
     }
 
+    public IEnumerator PrintHeadline()
+    {
+        yield return new WaitForEndOfFrame();
+        foreach (headlineText obj in texts)
+        {
+            Debug.Log(obj.headline);
+        }
+    }
+    
     public IEnumerator TakePicture(Camera camera)
     {
         yield return new WaitForEndOfFrame();
