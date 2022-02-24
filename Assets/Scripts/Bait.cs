@@ -33,6 +33,7 @@ public class Bait : MonoBehaviour
     void OnBecameInvisible()
     {
         seen = false;
-        player.GetComponent<Headline>().baitList.Remove(this);
+        if(player != null)
+            player.GetComponent<Headline>().baitList.Remove(this);
     }
 }

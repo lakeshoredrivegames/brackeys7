@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Headline : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class Headline : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         player = GameObject.FindWithTag("Player");
         CreateHeadlines();
     }
@@ -75,8 +77,15 @@ public class Headline : MonoBehaviour
             {
                 Debug.Log(headlineEntryList[i].headline);
                 scoreScreen.Setup(headlineEntryList[i].score, headlineEntryList[i].headline);
+                PlayerPrefs.SetInt("score", headlineEntryList[i].score);
+                PlayerPrefs.SetString("headline", headlineEntryList[i].headline);
+
             }
         }
+
+        Scene scene = SceneManager.GetActiveScene();
+        PlayerPrefs.SetString("_last_scene_", scene.name);
+        SceneManager.LoadScene("GameOver");
 
 
 

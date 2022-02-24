@@ -104,6 +104,7 @@ public class CameraControls : MonoBehaviour
         photoBoard.GetComponent<Renderer>().material.SetTexture("_MainTex", image);
 
         scoreScreen.image = image;
+        
 
     }
 }
