@@ -42,6 +42,9 @@ public class CameraControls : MonoBehaviour
     [SerializeField] 
     public List<headlineText> texts;
 
+    [SerializeField]
+    private Animator screenAnimator;
+
     private void Awake()
     {
         starterAssetsInput = GetComponent<StarterAssetsInputs>();
@@ -68,10 +71,14 @@ public class CameraControls : MonoBehaviour
 
             if (starterAssetsInput.snap)
             {
-                print("yay");
+                
                 StartCoroutine(TakePicture(cameraCam));
                 StartCoroutine(PrintHeadline());
+
                 starterAssetsInput.snap = false;
+
+
+
             }
         }
         else
@@ -85,6 +92,7 @@ public class CameraControls : MonoBehaviour
     public IEnumerator PrintHeadline()
     {
         yield return new WaitForEndOfFrame();
+
         foreach (headlineText obj in texts)
         {
             Debug.Log("During a health inspection, a " + obj.headline + " was found!");
@@ -93,7 +101,9 @@ public class CameraControls : MonoBehaviour
     
     public IEnumerator TakePicture(Camera camera)
     {
+        screenAnimator.SetBool("SnapTaken", true);
         yield return new WaitForEndOfFrame();
+
         RenderTexture CurrentRT = RenderTexture.active;
         RenderTexture.active = camera.targetTexture;
 
@@ -102,9 +112,11 @@ public class CameraControls : MonoBehaviour
         Texture2D image = new Texture2D(camera.targetTexture.width, camera.targetTexture.height);
         image.ReadPixels(new Rect(0, 0, camera.targetTexture.width, camera.targetTexture.height), 0, 0);
         image.Apply();
-
         RenderTexture.active = CurrentRT;
         photoTex = CurrentRT;
         photoBoard.GetComponent<Renderer>().material.SetTexture("_MainTex", image);
+        yield return new WaitForSeconds(0.1f);
+        screenAnimator.SetBool("SnapTaken", false);
+
     }
 }
