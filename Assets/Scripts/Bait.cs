@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class headlineText : MonoBehaviour
+public class Bait : MonoBehaviour
 {
-    public string headline;
+    public int score = 0;
+    public string name = "";
     public bool seen = false;
 
     private GameObject player;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +22,17 @@ public class headlineText : MonoBehaviour
         
     }
 
-
+    // if bait is in view, add to list
     void OnBecameVisible()
     {
         seen = true;
-        player.GetComponent<CameraControls>().texts.Add(this);
+        player.GetComponent<Headline>().baitList.Add(this);
     }
 
+    // if bait leaves view, remove from list
     void OnBecameInvisible()
     {
         seen = false;
-        player.GetComponent<CameraControls>().texts.Remove(this);
+        player.GetComponent<Headline>().baitList.Remove(this);
     }
 }

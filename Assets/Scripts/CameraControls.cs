@@ -39,13 +39,16 @@ public class CameraControls : MonoBehaviour
 
     private FirstPersonController firstPersonController;
 
-    [SerializeField] 
-    public List<headlineText> texts;
+    private Headline headline;
+
+    [SerializeField]
+    private ScoreScreen scoreScreen;
 
     private void Awake()
     {
         starterAssetsInput = GetComponent<StarterAssetsInputs>();
         firstPersonController = GetComponent<FirstPersonController>();
+        headline = GetComponent<Headline>();
     }
 
     void Update()
@@ -70,7 +73,7 @@ public class CameraControls : MonoBehaviour
             {
                 print("yay");
                 StartCoroutine(TakePicture(cameraCam));
-                StartCoroutine(PrintHeadline());
+                StartCoroutine(headline.PrintHeadline());
                 starterAssetsInput.snap = false;
             }
         }
@@ -82,14 +85,7 @@ public class CameraControls : MonoBehaviour
         }
     }
 
-    public IEnumerator PrintHeadline()
-    {
-        yield return new WaitForEndOfFrame();
-        foreach (headlineText obj in texts)
-        {
-            Debug.Log("During a health inspection, a " + obj.headline + " was found!");
-        }
-    }
+
     
     public IEnumerator TakePicture(Camera camera)
     {
@@ -106,5 +102,8 @@ public class CameraControls : MonoBehaviour
         RenderTexture.active = CurrentRT;
         photoTex = CurrentRT;
         photoBoard.GetComponent<Renderer>().material.SetTexture("_MainTex", image);
+
+        scoreScreen.image = image;
+
     }
 }
