@@ -4996,8 +4996,8 @@ MonoBehaviour:
   aim: 0
   snap: 0
   analogMovement: 0
-  cursorLocked: 1
-  cursorInputForLook: 1
+  cursorLocked: 0
+  cursorInputForLook: 0
 --- !u!1 &6965100364159982301
 GameObject:
   m_ObjectHideFlags: 0
