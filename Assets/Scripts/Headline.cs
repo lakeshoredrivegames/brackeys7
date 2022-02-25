@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using StarterAssets;
 
 public class Headline : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class Headline : MonoBehaviour
     private GameObject player;
     public int headlineScore = 0;
 
+    [SerializeField]
+    private StarterAssetsInputs starterAssetsInput;
 
     [SerializeField]
     public List<HeadlineEntry> headlineEntryList; // need to fix this so that it shows in inspector 
@@ -32,6 +35,11 @@ public class Headline : MonoBehaviour
         
         player = GameObject.FindWithTag("Player");
         CreateHeadlines();
+    }
+
+    void Awake()
+    {
+        starterAssetsInput = GetComponent<StarterAssetsInputs>();
     }
 
     // Update is called once per frame
@@ -60,6 +68,8 @@ public class Headline : MonoBehaviour
     public IEnumerator PrintHeadline()
     {
         yield return new WaitForEndOfFrame();
+
+
         headlineScore = 0;
         foreach (Bait bait in baitList)
         {
@@ -83,9 +93,9 @@ public class Headline : MonoBehaviour
             }
         }
 
-        Scene scene = SceneManager.GetActiveScene();
-        PlayerPrefs.SetString("_last_scene_", scene.name);
-        SceneManager.LoadScene("GameOver");
+        //Scene scene = SceneManager.GetActiveScene();
+        //PlayerPrefs.SetString("_last_scene_", scene.name);
+        //SceneManager.LoadScene("GameOver");
 
 
 

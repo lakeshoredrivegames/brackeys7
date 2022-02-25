@@ -19,10 +19,10 @@ public class ScoreScreen : MonoBehaviour
         //Cursor.visible = true;
         //Cursor.lockState = CursorLockMode.None;
     }
-
+/*
     void Awake()
     {
-
+        
         headlineContainer = transform.Find("HeadlineContainer");
         headlineTemplate = headlineContainer.Find("HeadlineTemplate");
         headlines = PlayerPrefs.GetString("headline");
@@ -33,21 +33,24 @@ public class ScoreScreen : MonoBehaviour
         headlineTemplate.Find("ClicksText").GetComponent<Text>().text = "clicks: " + PlayerPrefs.GetInt("score").ToString();
         headlineTemplate.Find("RawImage").GetComponent<RawImage>().texture = image;
     }
-
+*/
 
     public void Setup(int score, string headline)
     {
         headlineContainer = transform.Find("HeadlineContainer");
         headlineTemplate = headlineContainer.Find("HeadlineTemplate");
 
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         this.gameObject.SetActive(true);
 
         headlines = PlayerPrefs.GetString("headline");
         Debug.Log("headline on game over is " + headlines);
         headlineTemplate.Find("HeadlineText").GetComponent<Text>().text = headline;
-        
+        //headlineTemplate.Find("HeadlineText").GetComponent<Text>().text = PlayerPrefs.GetString("headline");
         headlineTemplate.Find("ClicksText").GetComponent<Text>().text = "clicks: " + score.ToString();
-        
+        //headlineTemplate.Find("ClicksText").GetComponent<Text>().text = "clicks: " + PlayerPrefs.GetInt("score").ToString();
         headlineTemplate.Find("RawImage").GetComponent<RawImage>().texture = image;
 
     }
