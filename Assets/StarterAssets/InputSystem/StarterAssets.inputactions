@@ -250,6 +250,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8aad7720-2da5-4830-b027-846ca9149ace",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f3b5f9a1-bd45-4358-b511-e8cb3f184ee3",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
