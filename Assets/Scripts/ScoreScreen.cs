@@ -58,7 +58,8 @@ public class ScoreScreen : MonoBehaviour
     public void RestartButton()
     {
         Debug.Log("scene: " + PlayerPrefs.GetString("_last_scene_"));
-        SceneManager.LoadScene(PlayerPrefs.GetString("_last_scene_"));
+        //SceneManager.LoadScene(PlayerPrefs.GetString("_last_scene_"));
+        this.gameObject.SetActive(false);
     }
 
     public void ExitButton()
