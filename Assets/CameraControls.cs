@@ -43,6 +43,18 @@ public class CameraControls : MonoBehaviour
 
     [SerializeField]
     private ScoreScreen scoreScreen;
+    [SerializeField]
+    private AudioSource source;
+
+    [SerializeField]
+    private AudioClip footstepClip1;
+    [SerializeField]
+    private AudioClip footstepClip2;
+    [SerializeField]
+    private AudioClip shutterClip;
+    [SerializeField]
+    private AudioClip readyClip;
+
 
     private void Awake()
     {
@@ -105,5 +117,33 @@ public class CameraControls : MonoBehaviour
 
         scoreScreen.image = image;
 
+    }
+
+    public void Footstep1()
+    {
+        source.clip = footstepClip1;
+        source.pitch = Random.Range(0.5f, 1);
+        source.Play();
+    }
+
+    public void Footstep2()
+    {
+        source.clip = footstepClip2;
+        source.pitch = Random.Range(0.5f, 1);
+        source.Play();
+    }
+
+    public void CameraReady()
+    {
+        source.clip = readyClip;
+        source.pitch = 1;
+        source.Play();
+    }
+
+    public void Shutters()
+    {
+        source.clip = shutterClip;
+        source.pitch = 1;
+        source.Play();
     }
 }
