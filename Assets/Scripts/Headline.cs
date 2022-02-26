@@ -9,22 +9,23 @@ public class Headline : MonoBehaviour
 {
     public ScoreScreen scoreScreen;
     public Sprite image;
+    public Text WarningText;
 
+    [System.Serializable]
     public class HeadlineEntry
     {
         public int score;
         public string headline;
     }
 
-    [SerializeField]
+
+    [HideInInspector]
     public List<Bait> baitList;
 
 
     private GameObject player;
-    public int headlineScore = 0;
-
-    [SerializeField]
-    private StarterAssetsInputs starterAssetsInput;
+    private int headlineScore = 0;
+    private int headlinesRemaining = 0;
 
     [SerializeField]
     public List<HeadlineEntry> headlineEntryList; // need to fix this so that it shows in inspector 
@@ -34,12 +35,26 @@ public class Headline : MonoBehaviour
     {
         
         player = GameObject.FindWithTag("Player");
-        CreateHeadlines();
+        
+        //Headline can be added into the inspector
+        //turn CreateHeadlines() on to load the headlines below. 
+        //CreateHeadlines();
     }
 
     void Awake()
     {
-        starterAssetsInput = GetComponent<StarterAssetsInputs>();
+        //store number of headlines in scene
+        PlayerPrefs.SetInt("numberOfHeadlines", headlineEntryList.Count);
+        headlinesRemaining = PlayerPrefs.GetInt("numberOfHeadlines");
+        if (headlineEntryList.Count == 0)
+        {
+            WarningText.text = "There are no headlines in this scene. Please add some to the Headline component on the player object.";
+            WarningText.gameObject.SetActive(true);
+        }
+        else
+            WarningText.gameObject.SetActive(false);
+
+ 
     }
 
     // Update is called once per frame
@@ -79,28 +94,19 @@ public class Headline : MonoBehaviour
 
         Debug.Log("Score is " + headlineScore );
 
-        //score: equals headline 
-        //if score is 10, headline is:"
-        for(int i = 0; i < headlineEntryList.Count; i++)
+        
+        for (int i = 0; i < headlineEntryList.Count; i++)
         {
             if(headlineScore == headlineEntryList[i].score)
             {
                 Debug.Log(headlineEntryList[i].headline);
                 scoreScreen.Setup(headlineEntryList[i].score, headlineEntryList[i].headline);
+                PlayerPrefs.SetInt("headlinesRemaining", --headlinesRemaining);
                 PlayerPrefs.SetInt("score", headlineEntryList[i].score);
                 PlayerPrefs.SetString("headline", headlineEntryList[i].headline);
 
             }
         }
-
-        //Scene scene = SceneManager.GetActiveScene();
-        //PlayerPrefs.SetString("_last_scene_", scene.name);
-        //SceneManager.LoadScene("GameOver");
-
-
-
+        
     }
-
-    
-
 }

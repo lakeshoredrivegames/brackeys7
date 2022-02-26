@@ -49,6 +49,9 @@ public class CameraControls : MonoBehaviour
         starterAssetsInput = GetComponent<StarterAssetsInputs>();
         firstPersonController = GetComponent<FirstPersonController>();
         headline = GetComponent<Headline>();
+        //hide and lock cursor
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     void Update()
@@ -82,6 +85,7 @@ public class CameraControls : MonoBehaviour
             aimCam.gameObject.SetActive(false);
             firstPersonController.SetSensitivity(normalSensitivity);
             animator.SetBool("IsAiming", false);
+            starterAssetsInput.snap = false;
         }
     }
 
