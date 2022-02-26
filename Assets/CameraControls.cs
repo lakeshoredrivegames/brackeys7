@@ -94,6 +94,7 @@ public class CameraControls : MonoBehaviour
             aimCam.gameObject.SetActive(false);
             firstPersonController.SetSensitivity(normalSensitivity);
             animator.SetBool("IsAiming", false);
+            starterAssetsInput.snap = false;
         }
     }
 
