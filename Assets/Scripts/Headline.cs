@@ -22,6 +22,8 @@ public class Headline : MonoBehaviour
     [HideInInspector]
     public List<Bait> baitList;
 
+    public List<int> scores;
+
 
     private GameObject player;
     private int headlineScore = 0;
@@ -94,16 +96,39 @@ public class Headline : MonoBehaviour
 
         Debug.Log("Score is " + headlineScore );
 
-        
+        // add score to score list so we can check if score has already been attained
+        if (scores.Count == 0)
+        {
+            scores.Add(headlineScore);
+            headlinesRemaining--;
+        }
+        else
+        {
+                if (scores.Contains(headlineScore))
+                {
+                    //already found the headline before
+                    // do not decrement the count
+                }
+                else
+                {
+                    //add to scores
+                    scores.Add(headlineScore);
+                    //decrement headlines remaining
+                    headlinesRemaining--;
+                }
+        }
+
         for (int i = 0; i < headlineEntryList.Count; i++)
         {
             if(headlineScore == headlineEntryList[i].score)
             {
                 Debug.Log(headlineEntryList[i].headline);
-                scoreScreen.Setup(headlineEntryList[i].score, headlineEntryList[i].headline);
-                PlayerPrefs.SetInt("headlinesRemaining", --headlinesRemaining);
+                
+                Debug.Log("headlines remaining: " + headlinesRemaining);
+                PlayerPrefs.SetInt("headlinesRemaining", headlinesRemaining);
                 PlayerPrefs.SetInt("score", headlineEntryList[i].score);
                 PlayerPrefs.SetString("headline", headlineEntryList[i].headline);
+                scoreScreen.Setup(headlineEntryList[i].score, headlineEntryList[i].headline);
 
             }
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using StarterAssets;
+using UnityEngine.InputSystem;
 
 public class ScoreScreen : MonoBehaviour
 {
@@ -10,11 +12,14 @@ public class ScoreScreen : MonoBehaviour
 
     private Transform headlineContainer;
     private Transform headlineTemplate;
+    public GameObject player;
 
     [HideInInspector]
     public Texture2D image;
     private string headlines;
     private int numHeadlines = 0;
+    private StarterAssetsInputs starterAssetsInput;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +27,26 @@ public class ScoreScreen : MonoBehaviour
         //DontDestroyOnLoad(transform.gameObject);
         //Cursor.visible = true;
         //Cursor.lockState = CursorLockMode.None;
+        
     }
 
     void Awake()
     {
-
         
+
     }
 
 
     public void Setup(int score, string headline)
     {
+        Debug.Log("in score screen setup");
+
+        
+        //disablw player from looking around
+        player = GameObject.FindWithTag("Player");
+        starterAssetsInput = player.GetComponent<StarterAssetsInputs>();
+        starterAssetsInput.canLook = false;
+
         headlineContainer = transform.Find("HeadlineContainer");
         headlineTemplate = headlineContainer.Find("HeadlineTemplate");
 
@@ -44,6 +58,7 @@ public class ScoreScreen : MonoBehaviour
         headlines = PlayerPrefs.GetString("headline");
         numHeadlines = PlayerPrefs.GetInt("headlinesRemaining");
 
+        Debug.Log("number headline remaining on score screen: " + numHeadlines);
         
         headlineTemplate.Find("HeadlineText").GetComponent<Text>().text = headline;
         //headlineTemplate.Find("HeadlineText").GetComponent<Text>().text = PlayerPrefs.GetString("headline");
@@ -60,6 +75,7 @@ public class ScoreScreen : MonoBehaviour
         //SceneManager.LoadScene(PlayerPrefs.GetString("_last_scene_"));
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+        starterAssetsInput.canLook = true;
         this.gameObject.SetActive(false);
     }
 
