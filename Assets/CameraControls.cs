@@ -61,6 +61,9 @@ public class CameraControls : MonoBehaviour
         starterAssetsInput = GetComponent<StarterAssetsInputs>();
         firstPersonController = GetComponent<FirstPersonController>();
         headline = GetComponent<Headline>();
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     void Update()
